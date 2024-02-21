@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/introduction_button"
+        android:layout_width="330dp"
+        android:layout_height="80dp"
+        android:backgroundTint="@color/white"
+        android:text="@string/main_introduce"
+        android:textColor="@color/blue"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/stop_watch_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread"
+        tools:ignore="VisualLintButtonSize" />
+
+    <Button
+        android:id="@+id/stop_watch_button"
+        android:layout_width="340dp"
+        android:layout_height="80dp"
+        android:backgroundTint="@color/white"
+        android:text="@string/main_stopwatch"
+        android:textColor="@color/blue"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/counter_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/introduction_button"
+        tools:ignore="VisualLintButtonSize,TextSizeCheck" />
+
+    <Button
+        android:id="@+id/counter_button"
+        android:layout_width="330dp"
+        android:layout_height="80dp"
+        android:backgroundTint="@color/white"
+        android:text="@string/main_counter"
+        android:textColor="@color/blue"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/calculator_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stop_watch_button"
+        tools:ignore="VisualLintButtonSize" />
+
+    <Button
+        android:id="@+id/calculator_button"
+        android:layout_width="330dp"
+        android:layout_height="80dp"
+        android:backgroundTint="@color/white"
+        android:text="@string/main_calculator"
+        android:textColor="@color/blue"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/to_do_list_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/counter_button"
+        tools:ignore="VisualLintButtonSize" />
+
+    <Button
+        android:id="@+id/to_do_list_button"
+        android:layout_width="330dp"
+        android:layout_height="80dp"
+        android:backgroundTint="@color/white"
+        android:text="@string/main_todo_list"
+        android:textColor="@color/blue"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/timer_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calculator_button"
+        tools:ignore="VisualLintButtonSize" />
+
+    <Button
+        android:id="@+id/timer_button"
+        android:layout_width="330dp"
+        android:layout_height="80dp"
+        android:backgroundTint="@color/white"
+        android:text="@string/main_timer"
+        android:textColor="@color/blue"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/textClock"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/to_do_list_button"
+        tools:ignore="VisualLintButtonSize" />
+
+    <TextClock
+        android:id="@+id/textClock"
+        android:layout_width="317dp"
+        android:layout_height="89dp"
+        android:background="#0A000000"
+        android:format24Hour="@string/main_text_clock_hint"
+        android:hint="@string/main_text_clock_hint"
+        android:singleLine="false"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TextContrastCheck" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

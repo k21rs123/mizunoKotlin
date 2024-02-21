@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">福岡県宗像市</string>
+    <string name="hint">テキストを入力</string>
+    <string name="question_hint">質問文</string>
+</resources>

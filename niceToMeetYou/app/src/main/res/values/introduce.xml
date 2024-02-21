@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="introduce_title">自己紹介</string>
+    <string name="introduce_name_title">・氏名</string>
+    <string name="introduce_name">水野良基</string>
+    <string name="introduce_blood_type_title">・血液型</string>
+    <string name="introduce_blood_type">B</string>
+    <string name="introduce_birthday_title">・生年月日</string>
+    <string name="introduce_birthday">2003年4月1日</string>
+    <string name="introduce_character_title">・性格</string>
+    <string name="introduce_character">マイペース</string>
+    <string name="introduce_hobby_title">・趣味</string>
+    <string name="introduce_hobby">ゲーム、漫画</string>
+    <string name="introduce_famous_food_title">・好きな食べ物</string>
+    <string name="introduce_famous_food">甘酸っぱいもの、新生姜</string>
+    <string name="introduce_hated_food_title">・嫌いな食べ物</string>
+    <string name="introduce_hated_food">蓮根</string>
+    <string name="introduce_comment_title">・ひとこと</string>
+    <string name="introduce_comment">よろしくお願いします</string>
+    <string name="introduce_image_icon">Icon</string>
+
+</resources>

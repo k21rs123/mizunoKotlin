@@ -1,0 +1,15 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+    id 'com.android.application' version '8.0.2' apply false
+    id 'com.android.library' version '8.0.2' apply false
+    id 'org.jetbrains.kotlin.android' version '1.9.0' apply false
+    id 'org.jetbrains.kotlin.plugin.serialization' version '1.6.20' apply false
+}
+
+ext {
+    version_code = 14
+    version_name = '0.1.14'
+    kotlin_sdk_version = 34
+    kotlin_supported_sdk_number = 5
+    kotlin_minimum_sdk_version = kotlin_sdk_version - kotlin_supported_sdk_number + 1
+}
