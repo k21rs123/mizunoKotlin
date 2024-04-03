@@ -12,12 +12,12 @@ import org.json.JSONArray
 
 class ToDoListActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityToDoListBinding
-    private lateinit var adapter : ArrayAdapter<String>
-    private lateinit var sharedPreferences:SharedPreferences
-    private var toDoArrayList : ArrayList<String> = ArrayList()
+    private lateinit var binding: ActivityToDoListBinding
+    private lateinit var adapter: ArrayAdapter<String>
+    private lateinit var sharedPreferences: SharedPreferences
+    private var toDoArrayList: ArrayList<String> = ArrayList()
 
-    override fun onCreate(savedInstanceState : Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setup()
@@ -49,25 +49,24 @@ class ToDoListActivity : AppCompatActivity() {
         //＋ボタンを押した時の処理
         binding.addButton.setOnClickListener {
             //入力欄を作成　EditTextを当アクティビティに新規作成
-            val editText = EditText(this)
+            EditText(this).apply {
+                AlertDialog.Builder(this@ToDoListActivity)//デフォルトのアラートダイアログテーマを使用するアラートダイアログのビルダーを作成
+                    //アラートダイアログのレイアウト設定
+                    .setTitle("リストの追加")//タイトル
+                    .setMessage("予定の入力")//メッセージ
+                    .setView(this)//作成したeditTextを使用して入力欄表示
 
-            //予定の入力
-            AlertDialog.Builder(this)//デフォルトのアラートダイアログテーマを使用するアラートダイアログのビルダーを作成
-                //アラートダイアログのレイアウト設定
-                .setTitle("リストの追加")//タイトル
-                .setMessage("予定の入力")//メッセージ
-                .setView(editText)//作成したeditTextを使用して入力欄表示
+                    //確定ボタン（アクションボタン）の作成    ダイアログのアイテムがクリックされたときに処理を実行出来る
+                    .setPositiveButton("追加") { _, _ ->
+                        //val newToDo = editText.text.toString()//入力欄で入力した文字列を保存する変数
+                        //保存された文字列をアダプターの中に追加
+                        adapter.add(this.text.toString())
+                        saveArrayList(toDoArrayList)
+                    }
+                    //キャンセルボタン　押されたら（null）何もしない
+                    .setNegativeButton("キャンセル", null).show()//上のダイアログを表示
+            }
 
-                //確定ボタン（アクションボタン）の作成    ダイアログのアイテムがクリックされたときに処理を実行出来る
-                .setPositiveButton("追加") {_,_ ->
-                    //val newToDo = editText.text.toString()//入力欄で入力した文字列を保存する変数
-                    //保存された文字列をアダプターの中に追加
-                    adapter.add(editText.text.toString())
-                    saveArrayList(toDoArrayList)
-                }
-                //キャンセルボタン　押されたら（null）何もしない
-                .setNegativeButton("キャンセル" , null)
-                .show()//上のダイアログを表示
         }
 
         //リストビューをクリックした時の処理
@@ -80,24 +79,25 @@ class ToDoListActivity : AppCompatActivity() {
                     adapter.remove(adapter.getItem(i))//選択された配列のi番目のリストを削除
                     saveArrayList(toDoArrayList)
                 }
-                .setNegativeButton("キャンセル" , null)
+                .setNegativeButton("キャンセル", null)
                 .show()//上のダイアログを表示
         }
     }
 
-    private fun saveArrayList(arrayList : ArrayList<String>) {
+    private fun saveArrayList(arrayList: ArrayList<String>) {
         val sharedPreferences = this.getPreferences(Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
 
         val jsonArray = JSONArray(arrayList)
-        editor.putString("todo" , jsonArray.toString())
+        editor.putString("todo", jsonArray.toString())
         editor.apply()
     }
-    private fun loadArrayList() : ArrayList<String> {
-        val jsonArray = JSONArray(sharedPreferences.getString("todo" , "[]"))
-        val arrayList : ArrayList<String> = ArrayList()
 
-        for(i in 0 until jsonArray.length()) {
+    private fun loadArrayList(): ArrayList<String> {
+        val jsonArray = JSONArray(sharedPreferences.getString("todo", "[]"))
+        val arrayList: ArrayList<String> = ArrayList()
+
+        for (i in 0 until jsonArray.length()) {
             arrayList.add(jsonArray.get(i) as String)
         }
         return arrayList

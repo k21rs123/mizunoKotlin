@@ -8,21 +8,26 @@ import java.text.DecimalFormat
 
 class CalculatorActivity : AppCompatActivity() {
 
-    private  lateinit var binding : ActivityCalculatorBinding
+    private lateinit var binding: ActivityCalculatorBinding
     //小数点をまとめる
     private val decimalFormat = DecimalFormat("#.########")
+
     //新しく数値を入れていいかのフラグ
     private var clear = false
+
     //演算子を押した後に計算を行うかを判断するフラグ
     private var calculate = false
+
     //実行予定の演算子を保持しておく変数
     private var operator = "no" //operator = 演算子
+
     //小数点　decimal point
     private var decimal = false
+
     //数値を保持する変数,値
     private var value = 0.0
 
-    override fun onCreate(savedInstanceState : Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setup()
@@ -34,58 +39,31 @@ class CalculatorActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
-    private fun preview(previewText : String) {
+    private fun preview(previewText: String) {
         binding.preview.text = previewText
     }
 
     private fun setOnClickListener() {
         binding.calculatorReturnButton.setOnClickListener { finish() }
 
-        //0
-        binding.zero.setOnClickListener  { numberButtonAction(0) }
-
-        //1
-        binding.one.setOnClickListener   { numberButtonAction(1) }
-
-        //2
-        binding.two.setOnClickListener   { numberButtonAction(2) }
-
-        //3
-        binding.three.setOnClickListener { numberButtonAction(3) }
-
-        //4
-        binding.four.setOnClickListener  { numberButtonAction(4) }
-
-        //5
-        binding.five.setOnClickListener  { numberButtonAction(5) }
-
-        //6
-        binding.six.setOnClickListener   { numberButtonAction(6) }
-
-        //7
-        binding.seven.setOnClickListener { numberButtonAction(7) }
-
-        //8
-        binding.eight.setOnClickListener { numberButtonAction(8) }
-
-        //9
-        binding.nine.setOnClickListener  { numberButtonAction(9) }
-
+        //numbers
+        val numberButtons = with(binding) {
+            listOf(
+                zero, one, two, three, four, five, six, seven, eight, nine
+            )
+        }
         //calcButtonAction行き
-        //+
-        binding.addition.setOnClickListener { calculateButtonAction("+") }
+        val operators = listOf("+", "-", "×", "÷", "^")
+        val operatorButtons = with(binding) {
+            listOf(addition, subtraction, multiplication, division, exponetion)
+        }
+        numberButtons.forEachIndexed { index, button ->
+            button.setOnClickListener { numberButtonAction(index) }
+        }
 
-        //-
-        binding.subtraction.setOnClickListener { calculateButtonAction("-") }
-
-        //×
-        binding.multiplication.setOnClickListener { calculateButtonAction("×") }
-
-        //÷
-        binding.division.setOnClickListener { calculateButtonAction("÷") }
-
-        //^
-        binding.exponetion.setOnClickListener { calculateButtonAction("^") }
+        operatorButtons.forEachIndexed { index, button ->
+            button.setOnClickListener { calculateButtonAction(operators[index]) }
+        }
 
         //その他
         //√
@@ -105,11 +83,10 @@ class CalculatorActivity : AppCompatActivity() {
     }
 
     //関数の宣言
-
     //数字ボタンを押した時の関数
-    private fun numberButtonAction(num : Int) {
+    private fun numberButtonAction(num: Int) {
         //acが無効かつテキストが０以外であれば
-        binding.result.text = if(binding.result.text.toString() != "0" && !clear) {//clear == false
+        binding.result.text = if (binding.result.text.toString() != "0" && !clear) {//clear == false
             binding.result.text.toString() + num.toString()
         } else {
             clear = false
@@ -120,28 +97,30 @@ class CalculatorActivity : AppCompatActivity() {
     }
 
     //計算を実行する際の演算子を確認する
-    private fun calculation(operator : String) : Double {
+    private fun calculation(operator: String): Double {
         // else 以外の場所は全て演算子を一回は押したときに運ばれてくる場所
         decimal = true
         return when (operator) {
-            "+" -> { value + binding.result.text.toString().toDouble() }
-            "-" -> { value - binding.result.text.toString().toDouble() }
-            "×" -> { value * binding.result.text.toString().toDouble() }
-            "÷" -> { value / binding.result.text.toString().toDouble() }
+            "+" -> value + binding.result.text.toString().toDouble()
+            "-" -> value - binding.result.text.toString().toDouble()
+            "×" -> value * binding.result.text.toString().toDouble()
+            "÷" -> value / binding.result.text.toString().toDouble()
             "^" -> {
                 val x = binding.result.text.toString().toInt()
                 val y = value
-                for(i in 1 until x) {
+                for (i in 1 until x) {
                     value *= y
                 }
                 value//計算後のvalueを返す
                 //最初に演算子を選択したときに数値が運ばれてくる場所
-            } else -> { binding.result.text.toString().toDouble() }
+            }
+
+            else -> binding.result.text.toString().toDouble()
         }
     }
 
     //計算の行う時の処理
-    private fun calculateButtonAction(personalOperator : String) {
+    private fun calculateButtonAction(personalOperator: String) {
         if (calculate) { //calc == true
             value = calculation(operator)
             binding.result.text = decimalFormat.format(value).toString()
@@ -154,7 +133,7 @@ class CalculatorActivity : AppCompatActivity() {
 
     //+/-が押されたとき値の正と負を入れ替え
     private fun plusMinusButtonAction() {
-        if(binding.result.text.toString().toDouble() != 0.0) {//テキストが０以外であれば
+        if (binding.result.text.toString().toDouble() != 0.0) {//テキストが０以外であれば
             val change = -binding.result.text.toString().toDouble()
             binding.result.text = decimalFormat.format(change).toString()
         }
@@ -162,18 +141,15 @@ class CalculatorActivity : AppCompatActivity() {
 
     //.が押されたとき
     private fun dotButtonAction() {
-        binding.result.text = if(!decimal) {
-            binding.result.text.toString() + "."
-        } else {
-            binding.result.text
-        }
+        binding.result.text = if (!decimal) binding.result.text.toString() + "."
+        else binding.result.text
         decimal = true
         calculate = true
     }
 
     //√ボタンを押した時の処理
     private fun sqrtButtonAction() {//sqrt関数　ルート計算する
-        if(binding.result.text.toString().toDouble() > 0) {
+        if (binding.result.text.toString().toDouble() > 0) {
             val sqrtNum: Double = sqrt(binding.result.text.toString().toDouble())
             binding.result.text = decimalFormat.format(sqrtNum).toString()
             clear = true

@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'jp.ac.kyusanu.nicetomeetyou'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "jp.ac.kyusanu.nicetomeetyou"
         minSdk 29
-        targetSdk 33
+        targetSdk 34
         versionCode 5
         versionName '0.1.3'
 
@@ -33,7 +33,7 @@ android {
     viewBinding{
         enabled = true
     }
-    buildToolsVersion '33.0.1'
+    buildToolsVersion '34.0.0'
 }
 
 dependencies {

@@ -39,24 +39,21 @@ class CounterActivity : AppCompatActivity() {
 
         binding.plusButton.setOnClickListener {
             count ++
-            editor.putInt("Count" , count)
-            editor.apply()
+            editor.putInt("Count" , count).apply()
             binding.countText.text = count.toString()
             reload(count)
         }
 
         binding.minusButton.setOnClickListener {
             count --
-            editor.putInt("Count" , count)
-            editor.apply()
+            editor.putInt("Count" , count).apply()
             binding.countText.text = count.toString()
             reload(count)
         }
 
         binding.clearButton.setOnClickListener {
             count = 0
-            editor.putInt("Count" , count)
-            editor.apply()
+            editor.putInt("Count" , count).apply()
             binding.countText.text = count.toString()
             reload(count)
         }
@@ -64,9 +61,7 @@ class CounterActivity : AppCompatActivity() {
 
     //カウントの値によってカウントテキストの色を変更
     private fun reload(count : Int) {
-        if(count < 0) {binding.countText.setTextColor(resources.getColor(R.color.red,theme))
-        } else {
-            binding.countText.setTextColor(resources.getColor(R.color.white,theme))
-        }
+        if(count < 0) binding.countText.setTextColor(resources.getColor(R.color.red,theme))
+        else binding.countText.setTextColor(resources.getColor(R.color.white,theme))
     }
 }
