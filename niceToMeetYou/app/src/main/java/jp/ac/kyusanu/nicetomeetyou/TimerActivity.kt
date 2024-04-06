@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
+import android.view.View
 import jp.ac.kyusanu.nicetomeetyou.databinding.ActivityTimerBinding
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -22,6 +23,14 @@ class TimerActivity : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
     private var startTime: Long = 0
     private var state = false
+    private fun startTimeListener(view:View) {
+        startTime  += when (view) {
+            binding.plusTenSecond -> 10000L
+            binding.plusMinute -> 60000L
+            else -> 300000L
+        }
+        binding.timerText.text = time.format(startTime)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,20 +120,8 @@ class TimerActivity : AppCompatActivity() {
                 plusFiveMinute.isEnabled = true
             }
 
-            plusTenSecond.setOnClickListener {
-                startTime += 10000L//10s
-                timerText.text = time.format(startTime)
-            }
-
-            plusMinute.setOnClickListener {
-                startTime += 60000L//60s
-                timerText.text = time.format(startTime)
-            }
-
-            plusFiveMinute.setOnClickListener {
-                startTime += 300000L//300s
-                timerText.text = time.format(startTime)
-            }
+            val buttons = listOf(plusTenSecond, plusMinute, plusFiveMinute)
+            buttons.forEach { button -> button.setOnClickListener(::startTimeListener) }
 
             readTimeButton.setOnClickListener {
                 startTime = sharedPreferences.getLong("Time", 0)
