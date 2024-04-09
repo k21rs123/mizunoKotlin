@@ -1,18 +1,18 @@
 <resources>
     <string name="app_name">niceToMeetYou</string>
-    <string name="main_introduce">自己紹介</string>
-    <string name="main_stopwatch">ストップウォッチ</string>
-    <string name="main_counter">カウンタ</string>
-    <string name="main_calculator">電卓</string>
-    <string name="main_todo_list">ToDoリスト</string>
-    <string name="main_timer">タイマー</string>
+    <string name="main_introduce">Introduce</string>
+    <string name="main_stopwatch">StopWatch</string>
+    <string name="main_counter">Counter</string>
+    <string name="main_calculator">Calculator</string>
+    <string name="main_todo_list">ToDoList</string>
+    <string name="main_timer">Timer</string>
     <string name="main_text_clock_hint">MM月dd日(E)　HH:mm:ss</string>
-    <string name="back_intent">戻る</string>
-    <string name="todo_text_view">ToDoリスト</string>
+    <string name="back_intent">Back</string>
+    <string name="todo_text_view">ToDoList</string>
     <string name="todo_add">+</string>
     <string name="preference_file_key">DataStore</string>
     <string name="counter_count_text">0</string>
-    <string name="counter_title">カウンタ</string>
+    <string name="counter_title">Counter</string>
     <string name="counter_reset">Clear</string>
     <string name="counter_sub">ー</string>
     <string name="stop_watch_count">00:00.0</string>
@@ -20,16 +20,16 @@
     <string name="stop_watch_reset">Reset</string>
     <string name="stop_watch_lap">LAP</string>
     <string name="stop_watch_start">Start</string>
-    <string name="stop_watch_save_lap">LAPタイム読み込み</string>
-    <string name="timer_start">スタート</string>
-    <string name="timer_restart">リスタート</string>
-    <string name="timer_stop">ストップ</string>
-    <string name="timer_reset">リセット</string>
-    <string name="timer_add_ten_second">+10秒</string>
-    <string name="timer_add_one_minute">+1分</string>
-    <string name="timer_add_five_minute">+5分</string>
+    <string name="stop_watch_save_lap">Load LAP Time</string>
+    <string name="timer_start">Start</string>
+    <string name="timer_restart">Restart</string>
+    <string name="timer_stop">Stop</string>
+    <string name="timer_reset">Reset</string>
+    <string name="timer_add_ten_second">+10sec</string>
+    <string name="timer_add_one_minute">+1min</string>
+    <string name="timer_add_five_minute">+5min</string>
     <string name="timer_count">00:00.0</string>
-    <string name="timer_lap">LAPタイム読み込み</string>
+    <string name="timer_lap">Load LAP Time</string>
 
     <string name="calculator_ac">AC</string>
     <string name="calculator_change_state">+/-</string>
@@ -51,5 +51,6 @@
     <string name="two">2</string>
     <string name="one">1</string>
     <string name="zero">0</string>
+    <string name="mizunoapp">MizunoApp</string>
 
 </resources>

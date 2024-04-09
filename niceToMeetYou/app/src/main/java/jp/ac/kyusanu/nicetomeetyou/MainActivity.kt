@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun selectIntent() = with(binding) {
+
         introductionButton.setOnClickListener { start(IntroduceActivity::class.java) }
         stopWatchButton.setOnClickListener { start(StopWatchActivity::class.java) }
         counterButton.setOnClickListener { start(CounterActivity::class.java) }//指定した遷移先に移動する
