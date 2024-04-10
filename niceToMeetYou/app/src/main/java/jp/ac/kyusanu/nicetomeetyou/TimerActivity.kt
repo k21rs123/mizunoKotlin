@@ -67,14 +67,9 @@ class TimerActivity : AppCompatActivity() {
                 if (startTime != 0L) {
                     timer = countDownTimer(startTime).start()
 
-                    countStart.isEnabled = false
+                    val views = listOf(countStart,countRestart,readTimeButton,plusTenSecond,plusMinute,plusFiveMinute)
+                    defineViewEnabled(views,false)
                     countStop.isEnabled = true
-                    countRestart.isEnabled = false
-                    readTimeButton.isEnabled = false
-
-                    plusTenSecond.isEnabled = false
-                    plusMinute.isEnabled = false
-                    plusFiveMinute.isEnabled = false
                     state = true
                 }
             }
@@ -110,14 +105,10 @@ class TimerActivity : AppCompatActivity() {
                 startTime = 0L
                 timerText.text = time.format(startTime)
 
-                countStart.isEnabled = true
+                val views = listOf(countStart,readTimeButton,plusTenSecond,plusMinute,plusFiveMinute)
+                defineViewEnabled(views,true)
                 countStop.isEnabled = false
                 countRestart.isEnabled = false
-                readTimeButton.isEnabled = true
-
-                plusTenSecond.isEnabled = true
-                plusMinute.isEnabled = true
-                plusFiveMinute.isEnabled = true
             }
 
             val buttons = listOf(plusTenSecond, plusMinute, plusFiveMinute)
@@ -128,6 +119,10 @@ class TimerActivity : AppCompatActivity() {
                 timerText.text = time.format(startTime)
             }
         }
+    }
+
+    private fun defineViewEnabled(views: List<View>, isEnabled: Boolean ) {
+        views.forEach{ view -> view.isEnabled = isEnabled }
     }
 
     private fun countDownTimer(timer: Long): CountDownTimer {
