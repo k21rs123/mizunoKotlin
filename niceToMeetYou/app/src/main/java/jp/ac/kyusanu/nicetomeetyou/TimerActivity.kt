@@ -78,9 +78,8 @@ class TimerActivity : AppCompatActivity() {
             countStop.setOnClickListener {
                 timer.cancel()//カウントダウンをキャンセル
 
-                countStart.isEnabled = true
                 countStop.isEnabled = false
-                countRestart.isEnabled = true
+                defineViewEnabled(listOf(countStart,countRestart),true)
                 state = false
             }
 
@@ -88,9 +87,8 @@ class TimerActivity : AppCompatActivity() {
             countRestart.setOnClickListener {
                 timer = countDownTimer(remainingTime).start()//remainingTimeの値でcountDownTimerをスタート
 
-                countStart.isEnabled = false
+                defineViewEnabled(listOf(countStart,countRestart),false)
                 countStop.isEnabled = true
-                countRestart.isEnabled = false
                 state = true
             }
 
@@ -107,8 +105,7 @@ class TimerActivity : AppCompatActivity() {
 
                 val views = listOf(countStart,readTimeButton,plusTenSecond,plusMinute,plusFiveMinute)
                 defineViewEnabled(views,true)
-                countStop.isEnabled = false
-                countRestart.isEnabled = false
+                defineViewEnabled(listOf(countStop,countRestart),false)
             }
 
             val buttons = listOf(plusTenSecond, plusMinute, plusFiveMinute)
@@ -135,11 +132,10 @@ class TimerActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {//時間切れになったときに発生する処理
-                binding.countStart.isEnabled = false
-                binding.countStop.isEnabled = false
-                binding.countRestart.isEnabled = false
-                binding.readTimeButton.isEnabled = false
-                binding.timerReturnButton.isEnabled = false
+                with(binding) {
+                    val views = listOf(countStart,countStop,countRestart,readTimeButton,timerReturnButton)
+                    defineViewEnabled(views,false)
+                }
 
                 alarm = MediaPlayer.create(this@TimerActivity, R.raw.alarm)
                 alarm.isLooping = true//ループする
