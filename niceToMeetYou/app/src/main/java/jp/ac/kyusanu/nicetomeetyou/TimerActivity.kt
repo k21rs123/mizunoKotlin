@@ -119,7 +119,7 @@ class TimerActivity : AppCompatActivity() {
     }
 
     private fun defineViewEnabled(views: List<View>, isEnabled: Boolean ) {
-        views.forEach{ view -> view.isEnabled = isEnabled }
+        views.forEach{ it.isEnabled = isEnabled }
     }
 
     private fun countDownTimer(timer: Long): CountDownTimer {

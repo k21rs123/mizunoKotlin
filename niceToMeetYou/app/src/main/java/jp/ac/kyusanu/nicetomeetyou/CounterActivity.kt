@@ -38,14 +38,14 @@ class CounterActivity : AppCompatActivity() {
         reload(count)
 
         binding.plusButton.setOnClickListener {
-            count ++
+            count += 1
             editor.putInt("Count" , count).apply()
             binding.countText.text = count.toString()
             reload(count)
         }
 
         binding.minusButton.setOnClickListener {
-            count --
+            count += 1
             editor.putInt("Count" , count).apply()
             binding.countText.text = count.toString()
             reload(count)

@@ -79,18 +79,16 @@ class ToDoListActivity : AppCompatActivity() {
                     adapter.remove(adapter.getItem(i))//選択された配列のi番目のリストを削除
                     saveArrayList(toDoArrayList)
                 }
-                .setNegativeButton("キャンセル", null)
-                .show()//上のダイアログを表示
+                .setNegativeButton("キャンセル", null).show()//上のダイアログを表示
         }
     }
 
     private fun saveArrayList(arrayList: ArrayList<String>) {
         val sharedPreferences = this.getPreferences(Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-
-        val jsonArray = JSONArray(arrayList)
-        editor.putString("todo", jsonArray.toString())
-        editor.apply()
+        with(sharedPreferences.edit()) {
+            val jsonArray = JSONArray(arrayList)
+            putString("todo", jsonArray.toString()).apply()
+        }
     }
 
     private fun loadArrayList(): ArrayList<String> {
