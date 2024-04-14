@@ -25,7 +25,7 @@
         android:layout_width="416dp"
         android:layout_height="67dp"
         android:background="@color/lightBlue"
-        android:text="@string/todo_text_view"
+        android:text="@string/todo_list"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="34sp"
