@@ -101,7 +101,6 @@ class TimerActivity : AppCompatActivity() {
                 }
                 if (state) timer.cancel()
                 startTime = 0L
-                timerText.text = time.format(startTime)
 
                 val views = listOf(countStart,readTimeButton,plusTenSecond,plusMinute,plusFiveMinute)
                 defineViewEnabled(views,true)
