@@ -61,12 +61,12 @@ fun ContentView() {
     val message = mutableListOf<Message>()
 
     val oceanEscapeSequences = listOf(
-        "\uD83C\uDF0A", // 海
-        "\uD83D\uDC20", // サメ
+        "\uD83C\uDF0A🌊", // 海
+        "\uD83D\uDC20🦈", // サメ
         "\uD83C\uDF0E", // 海岸
-        "\uD83C\uDF0B", // 船
-        "\uD83D\uDC0B", // クジラ
-        "\uD83E\uDD40" // 貝殻
+        "\uD83C\uDF0B🚢", // 船
+        "\uD83D\uDC0B🐳", // クジラ
+        "\uD83E\uDD40🐚" // 貝殻
     )
 
     fun generateRandomText(length: Int): String {
