@@ -1,4 +1,4 @@
-package jp.ac.kyusanu.introduceapp
+package jp.ac.kyusanu.introduceapp.screen
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -14,22 +14,23 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import jp.ac.kyusanu.introduceapp.screen.compose.NormalMaterialButton
 import jp.ac.kyusanu.introduceapp.ui.theme.IntroduceAppTheme
 
 @Composable 
 fun StartScreen(
-    onNavigateToConversation: () -> Unit
+    onNavigateToIntroduce: () -> Unit,
+    onNavigateToCounter: () -> Unit
 ) {
     Column {
-        IconButton( onClick = onNavigateToConversation,
-            content = { Text(text = "aaa\njkjkjk\nlkl"
-            ,
-                modifier = Modifier.padding(16.dp).size(96.dp)
-                    ) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(96.dp)
-        )
+        NormalMaterialButton(
+            onClickAction = onNavigateToIntroduce,
+            buttonText = "自己紹介に進む")
+        NormalMaterialButton(
+            onClickAction = onNavigateToCounter,
+            buttonText = "カウンターに進む")
+        
+        
     }
 
 }
