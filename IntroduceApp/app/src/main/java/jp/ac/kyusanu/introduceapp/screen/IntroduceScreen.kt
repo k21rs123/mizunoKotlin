@@ -23,6 +23,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import jp.ac.kyusanu.introduceapp.screen.compose.IntentBeforeScreenButton
 import jp.ac.kyusanu.introduceapp.screen.compose.NormalMaterialButton
 import jp.ac.kyusanu.introduceapp.ui.theme.IntroduceAppTheme
 
@@ -35,11 +36,7 @@ fun IntroduceScreen(
         modifier = Modifier
             .fillMaxSize()
     ) {
-        NormalMaterialButton(
-            onClickAction =  onNavigateToStart,
-            buttonText = "戻る",
-            modifier = Modifier
-                .padding(8.dp))
+        IntentBeforeScreenButton(onNavigateToStart)
         Text("自己紹介画面",
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center,

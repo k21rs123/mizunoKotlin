@@ -1,7 +1,6 @@
 package jp.ac.kyusanu.introduceapp
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,7 +12,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import jp.ac.kyusanu.introduceapp.model.ValueHolder
 import jp.ac.kyusanu.introduceapp.nav.Nav
 import jp.ac.kyusanu.introduceapp.screen.CounterScreen
 import jp.ac.kyusanu.introduceapp.screen.IntroduceScreen
@@ -24,7 +22,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val valueHolder = ValueHolder
+        val valueHolder = DeviceValueHolder
 
 //        enableEdgeToEdge() // <- 上下のバーを消して配置
         setContent {

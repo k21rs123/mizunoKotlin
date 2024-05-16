@@ -1,7 +1,6 @@
 package jp.ac.kyusanu.introduceapp.screen
 
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -22,18 +20,20 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import jp.ac.kyusanu.introduceapp.model.ValueHolder
-import jp.ac.kyusanu.introduceapp.model.add
-import jp.ac.kyusanu.introduceapp.model.randomColor
-import jp.ac.kyusanu.introduceapp.model.sub
+import jp.ac.kyusanu.introduceapp.model.CounterModel
+import jp.ac.kyusanu.introduceapp.DeviceValueHolder
+import jp.ac.kyusanu.introduceapp.model.countAdd
+import jp.ac.kyusanu.introduceapp.model.countReset
+import jp.ac.kyusanu.introduceapp.model.countSub
 import jp.ac.kyusanu.introduceapp.model.timerStart
+import jp.ac.kyusanu.introduceapp.screen.compose.CounterButton
+import jp.ac.kyusanu.introduceapp.screen.compose.IntentBeforeScreenButton
 import jp.ac.kyusanu.introduceapp.screen.compose.NormalMaterialButton
 import java.util.Timer
 
@@ -44,12 +44,13 @@ fun CounterScreen(
 ) {
 
     val timer = Timer()
-    val valueHolder = ValueHolder
+    val valueHolder = DeviceValueHolder
+    val counterModel = CounterModel
     val screenHeight = valueHolder.screenHeight
     val screenWidth = valueHolder.screenWidth
-    var count by remember { valueHolder.count }
-    var color by remember { mutableStateOf(Color.Black) }
-    var randomColor by remember { mutableStateOf(randomColor()) }
+    val count by remember { counterModel.count }
+    var color by remember { counterModel.color }
+    val randomColor by remember { counterModel.randomColor }
     var maxCount by remember { mutableIntStateOf(0) }
 
     Column(
@@ -64,13 +65,7 @@ fun CounterScreen(
         Row(
             horizontalArrangement = Arrangement.Start,
             modifier = Modifier.fillMaxWidth()
-        ) {
-            NormalMaterialButton(
-                onClickAction = onNavigateToStart,
-                buttonText = "戻る",
-                Modifier.padding(8.dp)
-            )
-        }
+        ) { IntentBeforeScreenButton ( onNavigateToStart ) }
 
         Box(
             contentAlignment = Alignment.Center,
@@ -102,50 +97,22 @@ fun CounterScreen(
             horizontalArrangement = Arrangement.SpaceAround,
             modifier = Modifier.fillMaxWidth()
         ) {
-            NormalMaterialButton(
-                onClickAction = {
-                    color = add()
-                    randomColor = randomColor()
-                },
-                buttonText = "+ 1",
-                modifier = Modifier.width(screenWidth * 0.3f)
-            )
-            NormalMaterialButton(
-                onClickAction = {
-                    color = sub()
-                    randomColor = randomColor()
-                },
-                buttonText = "- 1",
-                modifier = Modifier.width(screenWidth * 0.3f)
-            )
-            NormalMaterialButton(
-                onClickAction = {
-                    count = 0
-                    color = Color.Black
-                    randomColor = randomColor()
-                },
-                buttonText = "Reset",
-                modifier = Modifier.width(screenWidth * 0.3f)
-            )
+            CounterButton(onClickAction = { countAdd() }, buttonText = "+ 1")
+            CounterButton(onClickAction = { countSub() }, buttonText = "- 1")
+            CounterButton(onClickAction = { countReset() }, buttonText = "Reset")
         }
 
         Spacer(modifier = Modifier.padding(screenHeight * 0.01f))
 
         if (count > 0) {
-            NormalMaterialButton(
+            CounterButton(
                 onClickAction = {
                     color = Color.Black
                     maxCount = count
                     timerStart(timer)
-
                 },
-                buttonText = "Timer Start",
-                modifier = Modifier
+                buttonText = "Timer Start"
             )
         }
-
-
     }
-
-
 }
