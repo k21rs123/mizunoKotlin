@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -19,10 +20,15 @@ import jp.ac.kyusanu.introduceapp.screen.StartScreen
 import jp.ac.kyusanu.introduceapp.ui.theme.IntroduceAppTheme
 
 class MainActivity : ComponentActivity() {
+
+    companion object {
+        var screenWidth: Dp = 0.dp
+        var screenHeight: Dp = 0.dp
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val valueHolder = DeviceValueHolder
 
 //        enableEdgeToEdge() // <- 上下のバーを消して配置
         setContent {
@@ -30,8 +36,8 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     val navController = rememberNavController()
                     val configuration = LocalConfiguration.current
-                    valueHolder.screenWidth = configuration.screenWidthDp.dp
-                    valueHolder.screenHeight = configuration.screenHeightDp.dp
+                    screenWidth = configuration.screenWidthDp.dp
+                    screenHeight = configuration.screenHeightDp.dp
 
                     NavHost(
                         navController = navController,

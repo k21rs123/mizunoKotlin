@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import jp.ac.kyusanu.introduceapp.DeviceValueHolder
+import jp.ac.kyusanu.introduceapp.MainActivity
 import jp.ac.kyusanu.introduceapp.screen.compose.NormalMaterialButton
 
 @Preview
@@ -26,9 +26,9 @@ fun StartScreen(
     onNavigateToIntroduce: () -> Unit,
     onNavigateToCounter: () -> Unit
 ) {
-    val valueHolder = DeviceValueHolder
-    val screenHeight = valueHolder.screenHeight
-    val screenWidth = valueHolder.screenWidth
+    val mainActivity = MainActivity
+    val screenHeight = mainActivity.screenHeight
+    val screenWidth = mainActivity.screenWidth
 
 
     Column(

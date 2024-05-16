@@ -26,7 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import jp.ac.kyusanu.introduceapp.model.CounterModel
-import jp.ac.kyusanu.introduceapp.DeviceValueHolder
+import jp.ac.kyusanu.introduceapp.MainActivity
 import jp.ac.kyusanu.introduceapp.model.countAdd
 import jp.ac.kyusanu.introduceapp.model.countReset
 import jp.ac.kyusanu.introduceapp.model.countSub
@@ -49,9 +49,9 @@ fun CounterScreen(
 ) {
 
     val timer = Timer()
-    val valueHolder = DeviceValueHolder
+    val mainActivity = MainActivity
     val counterModel = CounterModel
-    val screenHeight = valueHolder.screenHeight
+    val screenHeight = mainActivity.screenHeight
 //    val screenWidth = valueHolder.screenWidth
     val count by remember { counterModel.count }
     var color by remember { counterModel.color }
