@@ -8,10 +8,20 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import jp.ac.kyusanu.introduceapp.DeviceValueHolder
 import jp.ac.kyusanu.introduceapp.screen.compose.NormalMaterialButton
 
-@Composable 
+@Preview
+@Composable
+fun StartScreenPreview() {
+    StartScreen(
+        onNavigateToIntroduce = {},
+        onNavigateToCounter = {}
+        )
+}
+
+@Composable
 fun StartScreen(
     onNavigateToIntroduce: () -> Unit,
     onNavigateToCounter: () -> Unit
@@ -36,8 +46,8 @@ fun StartScreen(
             onClickAction = onNavigateToCounter,
             buttonText = "カウンター",
             modifier = Modifier.width(screenWidth * 0.6f))
-        
-        
+
+
     }
 
 }

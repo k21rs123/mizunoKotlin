@@ -2,18 +2,13 @@ package jp.ac.kyusanu.introduceapp.model
 
 import android.util.Log
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import java.util.Timer
 import java.util.TimerTask
 import kotlin.random.Random
-
-
 
 class CounterModel : ViewModel() {
     companion object {
@@ -22,15 +17,19 @@ class CounterModel : ViewModel() {
         var color = mutableStateOf(Color.Black)
     }
 }
-
 private val counterModel = CounterModel
+/* ------------------------------------------------------------------------ */
+
+fun colorByCount(count: Int):Color {
+    return if (count >= 10) Color.Blue else if (count >= 0) Color.Black else Color.Red
+}
 
 fun countAdd() {
     counterModel.randomColor.value = randomColor()
     counterModel.count.value += 1
 
     val count = counterModel.count.value
-    counterModel.color.value = if (count >= 10) Color.Blue else if (count >= 0) Color.Black else Color.Red
+    counterModel.color.value = colorByCount(count)
 }
 
 fun countSub() {
@@ -38,7 +37,7 @@ fun countSub() {
     counterModel.count.value -= 1
 
     val count = counterModel.count.value
-    counterModel.color.value = if (count < 0) Color.Red else if (count < 10) Color.Black else Color.Blue
+    counterModel.color.value = colorByCount(count)
 }
 
 fun countReset() {
@@ -46,6 +45,7 @@ fun countReset() {
     counterModel.count.value = 0
     counterModel.color.value = Color.Black
 }
+
 
 fun randomColor(): Color {
     return Color(
