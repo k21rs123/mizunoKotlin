@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(innerPadding)
                     ) {
 
-                        composable(route = Nav.StartScreen.name,) {
+                        composable(route = Nav.StartScreen.name) {
                             StartScreen(
                                 onNavigateToIntroduce = {
                                     navController.navigate(Nav.IntroduceScreen.name)
