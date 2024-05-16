@@ -14,7 +14,7 @@ private val valueHolder = ValueHolder
 fun add(): Color {
     valueHolder.count.value += 1
     val count = valueHolder.count.value
-        return if (count >= 10) Color.Blue
+    return if (count >= 10) Color.Blue
     else if (count >= 0) Color.Black
     else Color.Red
 }

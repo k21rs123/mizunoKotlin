@@ -43,6 +43,7 @@ fun CounterScreen(
     onNavigateToStart: () -> Unit,
 ) {
 
+    val timer = Timer()
     val valueHolder = ValueHolder
     val screenHeight = valueHolder.screenHeight
     val screenWidth = valueHolder.screenWidth
@@ -50,7 +51,6 @@ fun CounterScreen(
     var color by remember { mutableStateOf(Color.Black) }
     var randomColor by remember { mutableStateOf(randomColor()) }
     var maxCount by remember { mutableIntStateOf(0) }
-    val timer = Timer()
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -77,26 +77,24 @@ fun CounterScreen(
             modifier = Modifier.size(screenHeight * 0.2f)
         ) {
 
-            val currentAngle = 360f * (if(count <= 0) 1f else count.toFloat() / maxCount) // 現在の角度
-
+            val currentAngle = 360f * (if(count <= 0) 1f else count.toFloat() / maxCount) //現在の角度
             Canvas(modifier = Modifier.size(screenHeight * 0.2f)) {
                 val radius = size.minDimension / 2
-                val strokeWidth = 24f // 線の太さを設定
-                val startAngle = -90f // 開始角度（上部）
 
-                // 円の外側の円を描画
+                //円の外側の円を描画
                 drawArc(
                     color = randomColor,
-                    startAngle = startAngle,
+                    startAngle = -90f,//開始角度(上部)
                     sweepAngle = currentAngle,
                     useCenter = false,
-                    topLeft = Offset(0f, 0f),
+                    topLeft = Offset.Zero,
                     size = Size(radius * 2, radius * 2),
-                    style = Stroke(width = strokeWidth)
+                    style = Stroke(width = 24f)//太さ２４f(Pixel)の線で構成
                 )
             }
             Text(text = "$count", color = color, fontSize = 48f.sp)
         }
+
         Spacer(modifier = Modifier.padding(32.dp))
 
         Row(
