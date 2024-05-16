@@ -28,19 +28,17 @@ private val counterModel = CounterModel
 fun countAdd() {
     counterModel.randomColor.value = randomColor()
     counterModel.count.value += 1
+
     val count = counterModel.count.value
-    counterModel.color.value = if (count >= 10) Color.Blue
-    else if (count >= 0) Color.Black
-    else Color.Red
+    counterModel.color.value = if (count >= 10) Color.Blue else if (count >= 0) Color.Black else Color.Red
 }
 
 fun countSub() {
     counterModel.randomColor.value = randomColor()
     counterModel.count.value -= 1
+
     val count = counterModel.count.value
-    counterModel.color.value = if (count < 0) Color.Red
-    else if (count < 10) Color.Black
-    else Color.Blue
+    counterModel.color.value = if (count < 0) Color.Red else if (count < 10) Color.Black else Color.Blue
 }
 
 fun countReset() {
