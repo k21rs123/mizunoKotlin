@@ -11,58 +11,52 @@ import java.util.TimerTask
 import kotlin.random.Random
 
 class CounterModel : ViewModel() {
-    companion object {
-        var count: MutableState<Int> = mutableIntStateOf(0)
-        var randomColor = mutableStateOf(randomColor())
-        var color = mutableStateOf(Color.Black)
+    var count: MutableState<Int> = mutableIntStateOf(0)
+    var randomColor = mutableStateOf(randomColor())
+    var color = mutableStateOf(Color.Black)
+
+    /* ------------------------------------------------------------------------ */
+
+    private fun determineColor(count: Int): Color {
+        return if (count >= 10) Color.Blue else if (count >= 0) Color.Black else Color.Red
     }
-}
-private val counterModel = CounterModel
-/* ------------------------------------------------------------------------ */
 
-fun colorByCount(count: Int):Color {
-    return if (count >= 10) Color.Blue else if (count >= 0) Color.Black else Color.Red
-}
+    private fun randomColor(): Color {
+        return Color(
+            red = Random.nextFloat(), blue = Random.nextFloat(), green = Random.nextFloat(), alpha = 1f
+        )
+    }
 
-fun countAdd() {
-    counterModel.randomColor.value = randomColor()
-    counterModel.count.value += 1
+    fun countAdd() {
+        randomColor.value = randomColor()
+        count.value += 1
 
-    val count = counterModel.count.value
-    counterModel.color.value = colorByCount(count)
-}
+        val count = count.value
+        color.value = determineColor(count)
+    }
 
-fun countSub() {
-    counterModel.randomColor.value = randomColor()
-    counterModel.count.value -= 1
+    fun countSub() {
+        randomColor.value = randomColor()
+        count.value -= 1
 
-    val count = counterModel.count.value
-    counterModel.color.value = colorByCount(count)
-}
+        val count = count.value
+        color.value = determineColor(count)
+    }
 
-fun countReset() {
-    counterModel.randomColor.value = randomColor()
-    counterModel.count.value = 0
-    counterModel.color.value = Color.Black
-}
+    fun countReset() {
+        randomColor.value = randomColor()
+        count.value = 0
+        color.value = Color.Black
+    }
 
-
-fun randomColor(): Color {
-    return Color(
-        red = Random.nextFloat(),
-        blue = Random.nextFloat(),
-        green = Random.nextFloat(),
-        alpha = 1f
-    )
-}
-
-fun timerStart(timer: Timer) {
-    var secondDelay = false
-    timer.schedule(object : TimerTask() {
-        override fun run() {
-            if (secondDelay)counterModel.count.value -= 1 else secondDelay = true
-            if (counterModel.count.value < 1) timer.cancel()
-        }
-    }, 0, 1000)
-    Log.d("fun timerStart(timer: Timer)","finish")
+    fun timerStart(timer: Timer) {
+        var secondDelay = false
+        timer.schedule(object : TimerTask() {
+            override fun run() {
+                if (secondDelay) count.value -= 1 else secondDelay = true
+                if (count.value < 1) timer.cancel()
+            }
+        }, 0, 1000)
+        Log.d("fun timerStart(timer: Timer)", "finish")
+    }
 }

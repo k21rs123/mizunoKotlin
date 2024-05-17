@@ -27,10 +27,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import jp.ac.kyusanu.introduceapp.model.CounterModel
 import jp.ac.kyusanu.introduceapp.MainActivity
-import jp.ac.kyusanu.introduceapp.model.countAdd
-import jp.ac.kyusanu.introduceapp.model.countReset
-import jp.ac.kyusanu.introduceapp.model.countSub
-import jp.ac.kyusanu.introduceapp.model.timerStart
 import jp.ac.kyusanu.introduceapp.screen.compose.CounterButton
 import jp.ac.kyusanu.introduceapp.screen.compose.IntentBeforeScreenButton
 import java.util.Timer
@@ -50,7 +46,7 @@ fun CounterScreen(
 
     val timer = Timer()
     val mainActivity = MainActivity
-    val counterModel = CounterModel
+    val counterModel = CounterModel()
     val screenHeight = mainActivity.screenHeight
 //    val screenWidth = valueHolder.screenWidth
     val count by remember { counterModel.count }
@@ -104,9 +100,9 @@ fun CounterScreen(
             horizontalArrangement = Arrangement.SpaceAround,
             modifier = Modifier.fillMaxWidth()
         ) {
-            CounterButton(onClickAction = { countAdd() }, buttonText = "+ 1")
-            CounterButton(onClickAction = { countSub() }, buttonText = "- 1")
-            CounterButton(onClickAction = { countReset() }, buttonText = "Reset")
+            CounterButton(onClickAction = { counterModel.countAdd() }, buttonText = "+ 1")
+            CounterButton(onClickAction = { counterModel.countSub() }, buttonText = "- 1")
+            CounterButton(onClickAction = { counterModel.countReset() }, buttonText = "Reset")
         }
 
         Spacer(modifier = Modifier.padding(screenHeight * 0.01f))
@@ -116,7 +112,7 @@ fun CounterScreen(
                 onClickAction = {
                     color = Color.Black
                     maxCount = count
-                    timerStart(timer)
+                    counterModel.timerStart(timer)
                 },
                 buttonText = "Timer Start"
             )
