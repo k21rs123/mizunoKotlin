@@ -1,5 +1,6 @@
 package jp.ac.kyusanu.introduceapp.screen
 
+import android.content.Context
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -35,24 +36,26 @@ import java.util.Timer
 @Preview
 @Composable
 fun CounterScreenPreview() {
-    CounterScreen(onNavigateToStart = {})
+     CounterScreen(onNavigateToStart = {})
 }
 
 
 @Composable
 fun CounterScreen(
-    onNavigateToStart: () -> Unit,
+    onNavigateToStart: () -> Unit
 ) {
 
     val timer = Timer()
     val mainActivity = MainActivity
-    val counterModel = CounterModel()
     val screenHeight = mainActivity.screenHeight
-//    val screenWidth = valueHolder.screenWidth
-    val count by remember { counterModel.count }
-    var color by remember { counterModel.color }
-    val randomColor by remember { counterModel.randomColor }
+    val screenWidth = mainActivity.screenWidth
+
+    val counterModel = remember { CounterModel() } // remember の使用方法を修正
     var maxCount by remember { mutableIntStateOf(0) }
+    var color by counterModel.color
+    val count by counterModel.count
+    val randomColor by counterModel.randomColor
+
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,

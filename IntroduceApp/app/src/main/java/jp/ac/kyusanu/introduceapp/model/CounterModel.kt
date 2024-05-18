@@ -22,14 +22,17 @@ class CounterModel : ViewModel() {
     }
 
     private fun randomColor(): Color {
+        Log.d("countAdd","$randomColor")
         return Color(
             red = Random.nextFloat(), blue = Random.nextFloat(), green = Random.nextFloat(), alpha = 1f
         )
     }
 
     fun countAdd() {
+
         randomColor.value = randomColor()
         count.value += 1
+        Log.d("countAdd",count.toString())
 
         val count = count.value
         color.value = determineColor(count)
@@ -38,6 +41,7 @@ class CounterModel : ViewModel() {
     fun countSub() {
         randomColor.value = randomColor()
         count.value -= 1
+        Log.d("countAdd",count.toString())
 
         val count = count.value
         color.value = determineColor(count)
@@ -46,6 +50,7 @@ class CounterModel : ViewModel() {
     fun countReset() {
         randomColor.value = randomColor()
         count.value = 0
+        Log.d("countAdd",count.toString())
         color.value = Color.Black
     }
 
