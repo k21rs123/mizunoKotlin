@@ -17,13 +17,15 @@ import jp.ac.kyusanu.introduceapp.screen.compose.NormalMaterialButton
 @Composable
 fun StartScreenPreview() {
     StartScreen(
-        onNavigateToCounter = {}
+        onNavigateToCounter = {},
+        onNavigateToToDo = {}
         )
 }
 
 @Composable
 fun StartScreen(
-    onNavigateToCounter: () -> Unit
+    onNavigateToCounter: () -> Unit,
+    onNavigateToToDo: () -> Unit
 ) {
     val mainActivity = MainActivity
     val screenHeight = mainActivity.screenHeight
@@ -42,7 +44,17 @@ fun StartScreen(
         NormalMaterialButton(
             onClickAction = onNavigateToCounter,
             buttonText = "カウンター",
-            modifier = Modifier.width(screenWidth * 0.6f))
+            modifier = Modifier.width(screenWidth * 0.6f)
+        )
+
+        Spacer(modifier = Modifier.padding(screenHeight * 0.01f))
+
+        NormalMaterialButton(
+            onClickAction = onNavigateToToDo,
+            buttonText = "ToDo",
+            modifier = Modifier.width(screenWidth * 0.6f)
+        )
+
 
 
     }

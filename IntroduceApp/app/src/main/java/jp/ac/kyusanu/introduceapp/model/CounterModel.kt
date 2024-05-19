@@ -11,6 +11,7 @@ import java.util.TimerTask
 import kotlin.random.Random
 
 class CounterModel : ViewModel() {
+
     var count: MutableState<Int> = mutableIntStateOf(0)
     var randomColor = mutableStateOf(randomColor())
     var color = mutableStateOf(Color.Black)
@@ -18,14 +19,18 @@ class CounterModel : ViewModel() {
     /* ------------------------------------------------------------------------ */
 
     private fun determineColor(count: Int): Color {
+
         return if (count >= 10) Color.Blue else if (count >= 0) Color.Black else Color.Red
+
     }
 
     private fun randomColor(): Color {
+
         Log.d("countAdd","$randomColor")
         return Color(
             red = Random.nextFloat(), blue = Random.nextFloat(), green = Random.nextFloat(), alpha = 1f
         )
+
     }
 
     fun countAdd() {
@@ -39,22 +44,27 @@ class CounterModel : ViewModel() {
     }
 
     fun countSub() {
+
         randomColor.value = randomColor()
         count.value -= 1
         Log.d("countAdd",count.toString())
 
         val count = count.value
         color.value = determineColor(count)
+
     }
 
     fun countReset() {
+
         randomColor.value = randomColor()
         count.value = 0
         Log.d("countAdd",count.toString())
         color.value = Color.Black
+
     }
 
     fun timerStart(timer: Timer) {
+
         var secondDelay = false
         timer.schedule(object : TimerTask() {
             override fun run() {
@@ -64,4 +74,5 @@ class CounterModel : ViewModel() {
         }, 0, 1000)
         Log.d("fun timerStart(timer: Timer)", "finish")
     }
+
 }

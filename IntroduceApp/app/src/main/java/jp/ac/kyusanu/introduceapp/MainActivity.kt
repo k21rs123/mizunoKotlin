@@ -17,6 +17,7 @@ import androidx.navigation.compose.rememberNavController
 import jp.ac.kyusanu.introduceapp.nav.Nav
 import jp.ac.kyusanu.introduceapp.screen.CounterScreen
 import jp.ac.kyusanu.introduceapp.screen.StartScreen
+import jp.ac.kyusanu.introduceapp.screen.ToDoScreen
 import jp.ac.kyusanu.introduceapp.ui.theme.IntroduceAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -48,12 +49,22 @@ class MainActivity : ComponentActivity() {
 
                                 onNavigateToCounter = {
                                     navController.navigate(Nav.CounterScreen.name)
+                                },
+                                onNavigateToToDo = {
+                                    navController.navigate(Nav.ToDoScreen.name)
                                 }
                             )
 
                         }
                         composable(Nav.CounterScreen.name) {
                             CounterScreen (
+                                onNavigateToStart = {
+                                    navController.navigate(Nav.StartScreen.name)
+                                }
+                            )
+                        }
+                        composable(Nav.ToDoScreen.name) {
+                            ToDoScreen(
                                 onNavigateToStart = {
                                     navController.navigate(Nav.StartScreen.name)
                                 }
