@@ -15,6 +15,7 @@ class CounterModel : ViewModel() {
     var count: MutableState<Int> = mutableIntStateOf(0)
     var randomColor = mutableStateOf(randomColor())
     var color = mutableStateOf(Color.Black)
+    lateinit var timer: Timer
 
     /* ------------------------------------------------------------------------ */
 
@@ -63,7 +64,9 @@ class CounterModel : ViewModel() {
 
     }
 
-    fun timerStart(timer: Timer) {
+    fun timerStart() {
+        if (::timer.isInitialized) timer.cancel()
+        timer = Timer()
 
         var secondDelay = false
         timer.schedule(object : TimerTask() {

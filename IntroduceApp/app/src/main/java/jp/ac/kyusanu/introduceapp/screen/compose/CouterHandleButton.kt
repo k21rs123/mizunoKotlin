@@ -6,9 +6,9 @@ import androidx.compose.ui.Modifier
 import jp.ac.kyusanu.introduceapp.MainActivity
 
 @Composable
-fun CounterButton(onClickAction: () -> Unit, buttonText: String) {
+fun CounterButton(onClickAction: () -> Unit, buttonText: String, modifier: Modifier) {
 
     val mainActivity = MainActivity
     val screenWidth = mainActivity.screenWidth
-    NormalMaterialButton(onClickAction = onClickAction, buttonText = buttonText, modifier = Modifier.width(screenWidth * 0.3f))
+    NormalMaterialButton(onClickAction = onClickAction, buttonText = buttonText, modifier = modifier.width(screenWidth * 0.3f))
 }

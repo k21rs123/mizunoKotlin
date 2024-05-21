@@ -1,7 +1,10 @@
 package jp.ac.kyusanu.introduceapp.screen
 
 import android.content.Context
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,14 +14,22 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
@@ -45,7 +56,6 @@ fun CounterScreen(
     onNavigateToStart: () -> Unit
 ) {
 
-    val timer = Timer()
     val mainActivity = MainActivity
     val screenHeight = mainActivity.screenHeight
     val screenWidth = mainActivity.screenWidth
@@ -55,6 +65,8 @@ fun CounterScreen(
     var color by counterModel.color
     val count by counterModel.count
     val randomColor by counterModel.randomColor
+    var expanded by rememberSaveable { mutableStateOf(false) }
+
 
 
     Column(
@@ -103,22 +115,56 @@ fun CounterScreen(
             horizontalArrangement = Arrangement.SpaceAround,
             modifier = Modifier.fillMaxWidth()
         ) {
-            CounterButton(onClickAction = { counterModel.countAdd() }, buttonText = "+ 1")
-            CounterButton(onClickAction = { counterModel.countSub() }, buttonText = "- 1")
-            CounterButton(onClickAction = { counterModel.countReset() }, buttonText = "Reset")
+            CounterButton(onClickAction = { counterModel.countAdd() }, buttonText = "+ 1", Modifier)
+            CounterButton(onClickAction = { counterModel.countSub() }, buttonText = "- 1", Modifier)
+            CounterButton(onClickAction = { counterModel.countReset() }, buttonText = "Reset", Modifier)
         }
 
         Spacer(modifier = Modifier.padding(screenHeight * 0.01f))
 
+        if(count <= 0) {
+            expanded = false
+            maxCount = 0
+        }
+
         if (count > 0) {
-            CounterButton(
-                onClickAction = {
-                    color = Color.Black
-                    maxCount = count
-                    counterModel.timerStart(timer)
-                },
-                buttonText = "Timer Start"
-            )
+            Column {
+                Button(
+                    onClick = {
+                        color = Color.Black
+                        maxCount = count
+                        counterModel.timerStart()
+                        expanded = !expanded
+
+                    },
+                    modifier = Modifier
+                        .width(screenWidth * 0.3f)
+                        .background(
+                            color = if (expanded) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary,
+                            shape = RoundedCornerShape(8.dp)
+                        ),
+                    enabled = !expanded,
+
+                ) {
+                    Text(text = "Timer Start")
+                }
+
+                AnimatedVisibility(visible = expanded) {
+                    CounterButton(
+                        onClickAction = {
+                            maxCount = 0
+                            counterModel.timer.cancel()
+                            expanded = !expanded
+                        },
+                        buttonText = "Stop",
+                        modifier = Modifier
+                    )
+                }
+
+            }
+
+
+
         }
     }
 }
