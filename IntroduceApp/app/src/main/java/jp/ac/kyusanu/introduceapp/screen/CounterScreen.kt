@@ -1,10 +1,8 @@
 package jp.ac.kyusanu.introduceapp.screen
 
-import android.content.Context
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,8 +27,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
@@ -41,7 +38,6 @@ import jp.ac.kyusanu.introduceapp.model.CounterModel
 import jp.ac.kyusanu.introduceapp.MainActivity
 import jp.ac.kyusanu.introduceapp.screen.compose.CounterButton
 import jp.ac.kyusanu.introduceapp.screen.compose.IntentBeforeScreenButton
-import java.util.Timer
 
 
 @Preview
@@ -135,12 +131,11 @@ fun CounterScreen(
                         maxCount = count
                         counterModel.timerStart()
                         expanded = !expanded
-
                     },
                     modifier = Modifier
                         .width(screenWidth * 0.3f)
                         .background(
-                            color = if (expanded) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary,
+                            color = if (expanded) MaterialTheme.colorScheme.primary else Color.Red,
                             shape = RoundedCornerShape(8.dp)
                         ),
                     enabled = !expanded,
