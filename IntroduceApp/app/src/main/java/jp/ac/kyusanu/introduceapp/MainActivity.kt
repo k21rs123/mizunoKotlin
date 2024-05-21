@@ -16,6 +16,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import jp.ac.kyusanu.introduceapp.nav.Nav
 import jp.ac.kyusanu.introduceapp.screen.CounterScreen
+import jp.ac.kyusanu.introduceapp.screen.QRScanScreen
 import jp.ac.kyusanu.introduceapp.screen.StartScreen
 import jp.ac.kyusanu.introduceapp.screen.ToDoScreen
 import jp.ac.kyusanu.introduceapp.ui.theme.IntroduceAppTheme
@@ -52,6 +53,9 @@ class MainActivity : ComponentActivity() {
                                 },
                                 onNavigateToToDo = {
                                     navController.navigate(Nav.ToDoScreen.name)
+                                },
+                                onNavigateToQRScan = {
+                                    navController.navigate(Nav.QRScanScreen.name)
                                 }
                             )
 
@@ -65,6 +69,13 @@ class MainActivity : ComponentActivity() {
                         }
                         composable(Nav.ToDoScreen.name) {
                             ToDoScreen(
+                                onNavigateToStart = {
+                                    navController.navigate(Nav.StartScreen.name)
+                                }
+                            )
+                        }
+                        composable(Nav.QRScanScreen.name) {
+                            QRScanScreen(
                                 onNavigateToStart = {
                                     navController.navigate(Nav.StartScreen.name)
                                 }
