@@ -34,7 +34,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_18
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "18"
     }
     buildFeatures {
         compose = true
@@ -63,6 +63,11 @@ dependencies {
 
     implementation(libs.zxing.core)
     implementation(libs.zxing.embedded)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidbrowserhelper)
+    implementation(libs.androidx.camera.view)
+    implementation(libs.vision.common)
+    implementation(libs.play.services.mlkit.barcode.scanning)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

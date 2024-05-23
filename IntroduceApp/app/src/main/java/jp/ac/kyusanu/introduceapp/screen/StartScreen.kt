@@ -60,8 +60,8 @@ fun StartScreen(
         Spacer(modifier = Modifier.padding(screenHeight * 0.01f))
 
         NormalMaterialButton(
-            onClickAction = onNavigateToToDo,
-            buttonText = "ToDo",
+            onClickAction = onNavigateToQRScan,
+            buttonText = "QRScanner",
             modifier = Modifier.width(screenWidth * 0.6f)
         )
 

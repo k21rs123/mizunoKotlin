@@ -15,7 +15,7 @@ fun QRScanScreen(
         IntentBeforeScreenButton(onClickAction = onNavigateToStart)
 
 
-
+        
     }
 
 }

@@ -12,6 +12,11 @@ composeBom = "2024.05.00"
 navigationCompose = "2.7.7"
 zxingAndroidEmbedded = "4.3.0"
 zxingVersion = "3.4.1"
+cameraLifecycle = "1.3.3"
+androidbrowserhelper = "2.5.0"
+cameraView = "1.3.3"
+visionCommon = "17.3.0"
+playServicesMlkitBarcodeScanning = "18.3.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -32,8 +37,13 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 
 
-zxing-core = { module = "com.google.zxing:core", version.ref = "core" }
+zxing-core = { module = "com.google.zxing:core", version.ref = "zxingVersion" }
 zxing-embedded = { module = "com.journeyapps:zxing-android-embedded", version.ref = "zxingAndroidEmbedded" }
+androidx-camera-lifecycle = { group = "androidx.camera", name = "camera-lifecycle", version.ref = "cameraLifecycle" }
+androidbrowserhelper = { group = "com.google.androidbrowserhelper", name = "androidbrowserhelper", version.ref = "androidbrowserhelper" }
+androidx-camera-view = { group = "androidx.camera", name = "camera-view", version.ref = "cameraView" }
+vision-common = { group = "com.google.mlkit", name = "vision-common", version.ref = "visionCommon" }
+play-services-mlkit-barcode-scanning = { group = "com.google.android.gms", name = "play-services-mlkit-barcode-scanning", version.ref = "playServicesMlkitBarcodeScanning" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
